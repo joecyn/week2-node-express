@@ -7,6 +7,7 @@ require('dotenv').config();
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json())
 
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
@@ -23,10 +24,14 @@ app.get("/",(req,res)=>{
 app.post("/user",(req,res)=>{
     const {name, email}= req.body;
 
-    if (!name || !email){
+    if(!name || !email){
         res.status(400).send("Missing Name or Email!")   
     }
-    res.send(`Hello ${name}`);
+    else{
+        res.send(`Hello ${name}`);
+    }
+    
+    
 
 });
 
